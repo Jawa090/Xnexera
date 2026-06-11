@@ -9,14 +9,23 @@ const __dirname = path.dirname(__filename);
 
 const serverModulePath = path.resolve(__dirname, "./dist/server/server.js");
 
-// Import the built TanStack Start server handler
-const serverModule = await import(pathToFileURL(serverModulePath).href);
-const handler = serverModule.default;
+// Cache the imported handler promise so we only import it once
+let cachedHandler = null;
+
+async function getHandler() {
+  if (!cachedHandler) {
+    const serverModule = await import(pathToFileURL(serverModulePath).href);
+    cachedHandler = serverModule.default;
+  }
+  return cachedHandler;
+}
 
 const port = process.env.PORT || 3000;
 
 http.createServer(async (req, res) => {
   try {
+    const handler = await getHandler();
+
     const protocol = req.headers["x-forwarded-proto"] || "http";
     const host = req.headers.host || "localhost";
     const url = `${protocol}://${host}${req.url}`;
