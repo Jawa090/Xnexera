@@ -74,6 +74,6 @@ http.createServer(async (req, res) => {
     res.setHeader("Content-Type", "text/plain");
     res.end("Internal Server Error");
   }
-}).listen(port, () => {
+}).listen(port, "0.0.0.0", () => {
   console.log(`Server is listening on port ${port}`);
 });
