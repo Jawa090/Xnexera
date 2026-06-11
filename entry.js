@@ -2,6 +2,7 @@ import http from "node:http";
 import { Readable } from "node:stream";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import fs from "node:fs";
 
 // Get __dirname equivalent in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -20,10 +21,44 @@ async function getHandler() {
   return cachedHandler;
 }
 
+const MIME_TYPES = {
+  ".html": "text/html; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".gif": "image/gif",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".webp": "image/webp",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+};
+
+function getMimeType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  return MIME_TYPES[ext] || "application/octet-stream";
+}
+
 const port = process.env.PORT || 3000;
 
 http.createServer(async (req, res) => {
   try {
+    // Serve static files from dist/client
+    let reqPath = req.url.split("?")[0]; // Remove query params
+    const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, "");
+    const localFilePath = path.join(__dirname, "dist/client", safePath);
+
+    if (fs.existsSync(localFilePath) && fs.statSync(localFilePath).isFile()) {
+      const mimeType = getMimeType(localFilePath);
+      res.writeHead(200, { "Content-Type": mimeType });
+      fs.createReadStream(localFilePath).pipe(res);
+      return;
+    }
+
     const handler = await getHandler();
 
     const protocol = req.headers["x-forwarded-proto"] || "http";
