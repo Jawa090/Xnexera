@@ -3,9 +3,6 @@ import { Readable } from "node:stream";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-import fs from "node:fs";
-import { execSync } from "node:child_process";
-
 // Get __dirname equivalent in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
