@@ -1,0 +1,7 @@
+<IfModule mod_passenger.c>
+    PassengerAppEnv production
+    PassengerAppRoot /home/u592805837/domains/xnexera.com/public_html
+    PassengerBaseURI /
+    PassengerNodejs /opt/alt/alt-nodejs20/root/usr/bin/node
+    PassengerStartupFile entry.js
+</IfModule>
