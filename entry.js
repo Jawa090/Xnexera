@@ -12,18 +12,6 @@ const __dirname = path.dirname(__filename);
 
 const serverModulePath = path.resolve(__dirname, "./dist/server/server.js");
 
-// Auto-run build if dist directory or server entry is missing
-if (!fs.existsSync(serverModulePath)) {
-  console.log("dist/server/server.js not found. Triggering production build...");
-  try {
-    execSync("npm run build", { stdio: "inherit", cwd: __dirname });
-    console.log("Production build completed successfully!");
-  } catch (err) {
-    console.error("Failed to run build:", err);
-    process.exit(1);
-  }
-}
-
 // Import the built TanStack Start server handler
 const serverModule = await import(pathToFileURL(serverModulePath).href);
 const handler = serverModule.default;
