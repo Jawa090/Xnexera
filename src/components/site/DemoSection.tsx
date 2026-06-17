@@ -84,7 +84,9 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
   const raf = useRef<number | null>(null);
   const last = useRef<number>(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const lastSpokenIdx = useRef<number>(-1);
 
+  // Setup the raf clock loop
   useEffect(() => {
     if (!playing) {
       if (raf.current) cancelAnimationFrame(raf.current);
@@ -114,16 +116,74 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
   const visible = demo.transcript.filter((l) => l.at <= t);
   const activeIdx = visible.length - 1;
 
+  // Auto-scroll transcript window
   useEffect(() => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [activeIdx]);
 
+  // Speech Synthesis Controller
+  useEffect(() => {
+    if (!playing) {
+      lastSpokenIdx.current = -1;
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      return;
+    }
+
+    if (activeIdx >= 0 && activeIdx !== lastSpokenIdx.current) {
+      lastSpokenIdx.current = activeIdx;
+      const currentLine = demo.transcript[activeIdx];
+      
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel(); // Cancel active speech
+        
+        const utterance = new SpeechSynthesisUtterance(currentLine.text);
+        const voices = window.speechSynthesis.getVoices();
+        
+        if (currentLine.who === "AI") {
+          // Female AI Voice
+          const voice = voices.find(v => {
+            const name = v.name.toLowerCase();
+            return name.includes("female") || name.includes("zira") || name.includes("samantha") || name.includes("hazel") || name.includes("google uk english female") || name.includes("natural");
+          });
+          if (voice) utterance.voice = voice;
+          utterance.pitch = 1.05;
+          utterance.rate = 0.95;
+        } else {
+          // Male Caller Voice
+          const voice = voices.find(v => {
+            const name = v.name.toLowerCase();
+            return name.includes("male") || name.includes("david") || name.includes("mark") || name.includes("george") || name.includes("google us english male");
+          });
+          if (voice) utterance.voice = voice;
+          utterance.pitch = 0.9;
+          utterance.rate = 1.05;
+        }
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+  }, [activeIdx, playing, demo.transcript]);
+
+  // Stop talking on unmount
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
   const progress = Math.min(1, t / demo.duration);
   const Icon = demo.Icon;
 
   const toggle = () => {
-    if (t >= demo.duration) setT(0);
+    if (t >= demo.duration) {
+      setT(0);
+      lastSpokenIdx.current = -1;
+    }
     setPlaying((p) => !p);
   };
 
@@ -152,7 +212,7 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
         <button
           onClick={toggle}
           aria-label={playing ? "Pause demo" : "Play demo"}
-          className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform hover:scale-105 active:scale-95"
+          className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform hover:scale-105 active:scale-95 cursor-pointer"
         >
           {playing && (
             <span aria-hidden className="absolute inset-0 animate-pulse-ring rounded-full border border-white/40" />
@@ -167,6 +227,8 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
           const filled = i / 56 < progress;
           // pseudo-random heights based on index
           const h = 18 + ((i * 37) % 100) * 0.42;
+          const isNearActive = playing && filled && Math.abs(i - (progress * 56)) < 6;
+          
           return (
             <span
               key={i}
@@ -174,8 +236,11 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
               style={{
                 height: `${h}%`,
                 background: filled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.15)",
-                transform: playing && filled && i > (progress * 56) - 6 ? "scaleY(1.15)" : "scaleY(1)",
+                transform: isNearActive ? "scaleY(1.3)" : "scaleY(1)",
                 transition: "background 200ms, transform 180ms",
+                animation: isNearActive ? "wave 0.8s ease-in-out infinite" : "none",
+                animationDelay: `${(i * 0.05) % 0.8}s`,
+                transformOrigin: "bottom"
               }}
             />
           );
@@ -219,7 +284,7 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
                   <span
                     className={`mt-[2px] inline-flex h-5 shrink-0 items-center rounded-md px-1.5 font-mono text-[10px] uppercase tracking-wider ${
                       l.who === "AI"
-                        ? "bg-white text-black"
+                        ? "bg-white text-black animate-pulse"
                         : "border border-white/10 bg-white/[0.04] text-muted-foreground"
                     }`}
                   >

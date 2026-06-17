@@ -6,6 +6,7 @@ import { HeroDashboard } from "@/components/site/Dashboard";
 import {
   StatementSection, BentoSection, HowItWorks, IndustriesSection,
   MetricsSection, IntegrationsSection, FinalCTA, Footer,
+  RoiCalculator, ComparisonSection, DeploymentWorkflow, SecuritySection,
 } from "@/components/site/Sections";
 import { DemoSection } from "@/components/site/DemoSection";
 import { ChatWidget } from "@/components/site/ChatWidget";
@@ -26,17 +27,21 @@ function Index() {
       {/* Ambient background */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 grid-bg opacity-[0.25]" />
-        <div className="absolute left-1/2 top-[-10%] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.06),transparent)]" />
-        <div className="absolute bottom-[-20%] right-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.04),transparent)]" />
+        <div className="absolute left-1/2 top-[-10%] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(235,125,2,0.06),transparent)]" />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(255,217,44,0.03),transparent)]" />
       </div>
 
       <Navbar />
       <Hero />
       <StatementSection />
       <BentoSection />
+      <RoiCalculator />
       <HowItWorks />
+      <DeploymentWorkflow />
       <IndustriesSection />
       <DemoSection />
+      <ComparisonSection />
+      <SecuritySection />
       <MetricsSection />
       <IntegrationsSection />
       <FinalCTA />
@@ -88,7 +93,7 @@ function Hero() {
             transition={{ duration: 0.9, delay: 0.35 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <a href="#cta" className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-transform hover:scale-[1.02]">
+            <a href="#cta" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
               Book Demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>

@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
-import nexeraLogo from "@/assets/nexera-logo.png";
+import { useRef, useState } from "react";
+import logoImg from "@/assets/logo.png";
 import {
   PhoneCall, MessageSquare, ClipboardCheck, CalendarClock, Workflow, Clock,
   ArrowRight, Stethoscope, Home, ChevronRight,
+  DollarSign, TrendingUp, Check,
+  Cpu, UserCheck, ShieldCheck, Sparkles, Lock, Shield, Eye, RefreshCw,
 } from "lucide-react";
 import {
   SiHubspot, SiSalesforce, SiTwilio, SiGooglecalendar, SiZapier, SiMake, SiN8N, SiSlack, SiGoogle,
@@ -270,7 +272,7 @@ export function FinalCTA() {
         </motion.h2>
         <p className="mt-6 max-w-xl text-lg text-muted-foreground">Deploy AI employees in days, not months.</p>
         <div className="mt-10 flex flex-wrap gap-3">
-          <a href="#" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-transform hover:scale-[1.02]">
+          <a href="#" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
             Book Demo <ArrowRight className="h-4 w-4" />
           </a>
           <a href="#" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/10">
@@ -289,9 +291,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2">
-              <img src={nexeraLogo} alt="Nexera" width={32} height={32} loading="lazy" className="h-8 w-8 object-contain" />
-              <span className="text-base font-semibold tracking-[0.18em]">NEXERA</span>
+            <div className="flex items-center">
+              <img src={logoImg} alt="Nexera Logo" loading="lazy" className="h-9 w-auto object-contain" />
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">AI voice and chat agents that answer, qualify, and book — 24/7.</p>
           </div>
@@ -313,6 +314,325 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
         {items.map((i) => <li key={i}><a href="#" className="text-sm text-foreground/80 transition-colors hover:text-foreground">{i}</a></li>)}
       </ul>
     </div>
+  );
+}
+
+/* ---------- ROI Calculator ---------- */
+export function RoiCalculator() {
+  const [calls, setCalls] = useState(1000);
+  const [leadValue, setLeadValue] = useState(250);
+
+  // Industry average missed call rate is 25%
+  const missedCalls = Math.round(calls * 0.25);
+  // Average booking/qualification rate of recovered calls is 85%
+  const recoveredCalls = Math.round(missedCalls * 0.85);
+  // Average lead-to-sale conversion rate is 15%
+  const closedDeals = Math.round(recoveredCalls * 0.15);
+  // Monthly revenue lost currently
+  const revenueLost = Math.round(missedCalls * 0.15 * leadValue);
+  // Monthly revenue recovered with Nexera
+  const revenueRecovered = Math.round(closedDeals * leadValue);
+  // Human salary vs Nexera cost
+  const humanCost = 3500;
+  const nexeraCost = Math.round(calls * 0.50); // $0.50 per call average
+  const monthlySavings = humanCost + revenueRecovered - nexeraCost;
+
+  return (
+    <section id="roi-calculator" className="relative mx-auto max-w-7xl px-6 py-20">
+      <SectionHead eyebrow="ROI Calculator" title={<>Calculate what missed calls<br /><span className="text-muted-foreground">are costing your business.</span></>} />
+      
+      <div className="grid gap-8 lg:grid-cols-12">
+        {/* Sliders Control Panel */}
+        <div className="glass rounded-3xl p-8 lg:col-span-5 flex flex-col justify-center space-y-8">
+          <div>
+            <div className="flex justify-between items-center mb-3">
+              <label className="text-sm font-medium text-foreground">Monthly Inbound Calls</label>
+              <span className="text-lg font-bold text-[#ffd92c]">{calls.toLocaleString()}</span>
+            </div>
+            <input 
+              type="range" 
+              min="100" 
+              max="5000" 
+              step="100"
+              value={calls}
+              onChange={(e) => setCalls(Number(e.target.value))}
+              className="w-full accent-[#eb7d02] bg-white/10 h-1 rounded-lg cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <span>100</span>
+              <span>5,000+</span>
+            </div>
+          </div>
+
+          <div>
+            <div className="flex justify-between items-center mb-3">
+              <label className="text-sm font-medium text-foreground">Average Lead Value</label>
+              <span className="text-lg font-bold text-[#ffd92c]">${leadValue}</span>
+            </div>
+            <input 
+              type="range" 
+              min="20" 
+              max="2000" 
+              step="10"
+              value={leadValue}
+              onChange={(e) => setLeadValue(Number(e.target.value))}
+              className="w-full accent-[#eb7d02] bg-white/10 h-1 rounded-lg cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <span>$20</span>
+              <span>$2,000+</span>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl border border-[#eb7d02]/20 bg-[#eb7d02]/5 text-xs text-muted-foreground leading-relaxed">
+            <span className="font-semibold text-white block mb-1">Industry Statistics:</span>
+            On average, <strong>25% of inbound business calls</strong> go unanswered. 85% of those callers will not call back and instead contact a competitor.
+          </div>
+        </div>
+
+        {/* Results Panel */}
+        <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
+          {/* Card 1: Revenue Lost */}
+          <div className="glass rounded-3xl p-6 border border-red-500/10 flex flex-col justify-between">
+            <div>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">Unanswered Calls / Mo</div>
+              <div className="text-3xl font-bold mt-2 text-red-400">{missedCalls}</div>
+            </div>
+            <div className="mt-8">
+              <div className="text-xs text-muted-foreground">Est. Lost Revenue / Mo</div>
+              <div className="text-xl font-semibold text-red-500">${revenueLost.toLocaleString()}</div>
+            </div>
+          </div>
+
+          {/* Card 2: Revenue Recovered */}
+          <div className="glass rounded-3xl p-6 border border-[#eb7d02]/30 bg-gradient-to-b from-[#eb7d02]/10 to-transparent flex flex-col justify-between relative overflow-hidden">
+            <div aria-hidden className="absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-[#eb7d02]/10 blur-2xl" />
+            <div>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">Calls Answered by Nexera</div>
+              <div className="text-3xl font-bold mt-2 text-[#ffd92c]">100%</div>
+            </div>
+            <div className="mt-8">
+              <div className="text-xs text-muted-foreground">Recovered Revenue / Mo</div>
+              <div className="text-2xl font-bold text-gradient">${revenueRecovered.toLocaleString()}</div>
+            </div>
+          </div>
+
+          {/* Card 3: Cost Comparison */}
+          <div className="glass rounded-3xl p-6 sm:col-span-2 flex flex-col justify-between border border-[#ffd92c]/20 bg-gradient-to-r from-black via-black to-[#ffd92c]/5">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">Operational Efficiency</div>
+                <div className="text-lg font-semibold mt-1">Nexera vs. Full-Time Receptionist</div>
+              </div>
+              <TrendingUp className="h-5 w-5 text-[#ffd92c]" />
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-b border-white/5 py-4">
+              <div>
+                <span className="text-xs text-muted-foreground block">Human Receptionist Cost</span>
+                <span className="text-base font-semibold text-red-400">$3,500/mo</span>
+              </div>
+              <div>
+                <span className="text-xs text-muted-foreground block">Nexera Agent Cost</span>
+                <span className="text-base font-semibold text-green-400">${nexeraCost}/mo</span>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-between items-center">
+              <div>
+                <div className="text-xs text-muted-foreground">Total Monthly Value Generated</div>
+                <div className="text-3xl font-black text-gradient">${monthlySavings.toLocaleString()}</div>
+              </div>
+              <a href="#cta" className="rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-xs font-bold text-black transition-transform hover:scale-[1.03]">
+                Claim Your ROI
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Comparison Section ---------- */
+export function ComparisonSection() {
+  const tableData = [
+    { feature: "Speed to Answer", nexera: "Instant (<0.8s)", humans: "15-45 seconds", bots: "Text-only / Delayed" },
+    { feature: "Cost per Call/Minute", nexera: "~$0.15 - $0.50", humans: "$2.50 - $4.50+", bots: "Low, but lacks voice" },
+    { feature: "Availability", nexera: "24/7/365 (Zero hold)", humans: "Business Hours only", bots: "24/7 (Text-only)" },
+    { feature: "Booking & Qualification", nexera: "Adaptive & Custom Playbooks", humans: "Varies by training", bots: "Rigid button-based flows" },
+    { feature: "CRM & Live Sync", nexera: "Real-time Bi-directional", humans: "Manual entry / Post-call", bots: "Limited API integrations" },
+    { feature: "Simultaneous Lines", nexera: "Unlimited / Infinite scale", humans: "1 line per agent", bots: "High, but chat only" },
+  ];
+
+  return (
+    <section id="comparison" className="relative mx-auto max-w-7xl px-6 py-20">
+      <SectionHead eyebrow="The Advantage" title={<>How Nexera outmatches<br /><span className="text-muted-foreground">traditional options.</span></>} />
+      
+      <div className="overflow-x-auto rounded-3xl border border-white/5 bg-white/[0.01] backdrop-blur-md">
+        <table className="w-full min-w-[600px] border-collapse text-left">
+          <thead>
+            <tr className="border-b border-white/5 bg-white/[0.02]">
+              <th className="p-6 text-sm font-semibold text-muted-foreground">Features & Capabilities</th>
+              <th className="p-6 text-sm font-bold text-[#ffd92c] border-l border-white/5">
+                <span className="inline-block bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] bg-clip-text text-transparent font-black">Nexera AI Agents</span>
+              </th>
+              <th className="p-6 text-sm font-semibold text-muted-foreground border-l border-white/5">Traditional Call Center</th>
+              <th className="p-6 text-sm font-semibold text-muted-foreground border-l border-white/5">Standard Chatbots</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-white/5">
+            {tableData.map((row, index) => (
+              <tr key={index} className="transition-colors hover:bg-white/[0.01]">
+                <td className="p-6 text-sm font-medium text-foreground">{row.feature}</td>
+                <td className="p-6 text-sm font-semibold text-white border-l border-white/5 bg-gradient-to-r from-[#eb7d02]/5 to-transparent">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-[#ffd92c] shrink-0" />
+                    <span>{row.nexera}</span>
+                  </div>
+                </td>
+                <td className="p-6 text-sm text-muted-foreground border-l border-white/5">{row.humans}</td>
+                <td className="p-6 text-sm text-muted-foreground border-l border-white/5">{row.bots}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      <div className="mt-8 text-center text-xs text-muted-foreground">
+        *Based on average operational data from healthcare and real estate clients in 2026.
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Deployment Workflow ---------- */
+export function DeploymentWorkflow() {
+  const stepsList = [
+    {
+      day: "Day 01",
+      title: "Playbook Design",
+      desc: "We analyze your calls, FAQs, and custom booking logic to construct your tailored agent playbook.",
+      icon: Sparkles,
+      color: "#ffd92c",
+    },
+    {
+      day: "Day 02",
+      title: "Voice & Tone Training",
+      desc: "Select a hyper-realistic native voice and fine-tune latency so interactions feel human and natural.",
+      icon: Cpu,
+      color: "#eb7d02",
+    },
+    {
+      day: "Day 03",
+      title: "CRM & API Integration",
+      desc: "Connect to your calendar, CRM (HubSpot, Salesforce), and phone systems (Twilio, VoIP).",
+      icon: UserCheck,
+      color: "#ffd92c",
+    },
+    {
+      day: "Day 04-05",
+      title: "Pilot & Live Launch",
+      desc: "Run simulations, test edge cases, and launch live to handle overflow or 100% of calls.",
+      icon: ShieldCheck,
+      color: "#eb7d02",
+    },
+  ];
+
+  return (
+    <section id="process" className="relative mx-auto max-w-7xl px-6 py-20">
+      <SectionHead eyebrow="Deployment Process" title={<>How we build &amp; deploy<br /><span className="text-muted-foreground">your custom AI Agent.</span></>} />
+      
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {stepsList.map((step, idx) => {
+          const Icon = step.icon;
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="glass group relative overflow-hidden rounded-3xl p-6 transition-all hover:border-[#eb7d02]/30 hover:shadow-[0_4px_30px_rgba(235,125,2,0.1)]"
+            >
+              <div 
+                className="absolute top-0 left-0 h-[3px] w-full transition-all duration-300 group-hover:scale-x-110"
+                style={{ background: `linear-gradient(90deg, ${step.color}, #eb7d02)` }}
+              />
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#ffd92c]">{step.day}</span>
+                <div className="rounded-full bg-white/[0.03] p-2 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <Icon className="h-5 w-5" />
+                </div>
+              </div>
+              <h3 className="mt-6 text-lg font-semibold tracking-tight text-white">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Security & Trust ---------- */
+export function SecuritySection() {
+  const securityItems = [
+    {
+      title: "HIPAA & PII Safeguards",
+      desc: "Fully HIPAA aware. Every voice recording and transcript is encrypted in transit and at rest with automated PII redaction.",
+      icon: Shield,
+    },
+    {
+      title: "Jailbreak Prevention",
+      desc: "Robust input/output guardrails ensure the AI agent sticks strictly to your playbooks, preventing prompt injection.",
+      icon: Lock,
+    },
+    {
+      title: "Redundant VoIP Routing",
+      desc: "Built on globally redundant telecom networks with automatic failovers to guarantee 99.99% call connection uptime.",
+      icon: RefreshCw,
+    },
+    {
+      title: "Audit Logs & Monitoring",
+      desc: "Full audit logs, live call sentiment analysis, and continuous monitoring via SOC2 Type II compliance standards.",
+      icon: Eye,
+    },
+  ];
+
+  return (
+    <section id="security" className="relative mx-auto max-w-7xl px-6 py-20 border-t border-white/5">
+      <div className="grid gap-12 lg:grid-cols-12 items-center">
+        {/* Left side info */}
+        <div className="lg:col-span-5">
+          <SectionHead eyebrow="Security" title={<>Enterprise Trust &amp; Compliance</>} />
+          <p className="text-muted-foreground leading-relaxed -mt-6">
+            We understand that AI handling client communications requires absolute security. Nexera is built from the ground up to protect user data, adhere to strict regulatory compliance, and prevent prompt manipulation.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <span className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs font-mono font-medium text-white">HIPAA AWARE</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs font-mono font-medium text-white">SOC2 TYPE II (Q3 2026)</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs font-mono font-medium text-white">GDPR COMPLIANT</span>
+          </div>
+        </div>
+
+        {/* Right side grid */}
+        <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
+          {securityItems.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div key={idx} className="glass rounded-3xl p-6 border border-white/5 hover:border-white/10 transition-colors">
+                <div className="rounded-2xl bg-white/[0.02] p-3 w-fit text-[#ffd92c]">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{item.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 

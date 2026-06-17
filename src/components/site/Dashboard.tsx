@@ -17,7 +17,7 @@ export function HeroDashboard() {
       className="relative w-full"
     >
       {/* glow */}
-      <div aria-hidden className="absolute -inset-10 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(37,99,235,0.35),transparent_70%)] blur-3xl" />
+      <div aria-hidden className="absolute -inset-10 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(235,125,2,0.35),transparent_70%)] blur-3xl" />
 
       <div className="glass overflow-hidden rounded-2xl shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)]">
         {/* top bar */}

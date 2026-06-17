@@ -4,8 +4,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { streamText, convertToModelMessages } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-const appCss = "/assets/styles-DM3AYMcA.css";
-const nexeraLogo = "/assets/nexera-logo-BxxnZrXK.png";
+const appCss = "/assets/styles-cYtYN1d_.css";
+const logoImg = "/assets/logo-icon-Ca2XHlNh.png";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -43,7 +43,7 @@ const Route$5 = createRootRouteWithContext()({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: nexeraLogo, type: "image/png" }
+      { rel: "icon", href: logoImg, type: "image/png" }
     ]
   }),
   shellComponent: RootShell,
@@ -100,7 +100,7 @@ const Route$2 = createFileRoute("/dpa")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-Dm0ihWu0.js");
+const $$splitComponentImporter = () => import("./index-B3WhugIz.js");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -208,6 +208,6 @@ const router = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   getRouter
 }, Symbol.toStringTag, { value: "Module" }));
 export {
-  nexeraLogo as n,
+  logoImg as l,
   router as r
 };

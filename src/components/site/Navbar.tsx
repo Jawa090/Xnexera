@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import nexeraLogo from "@/assets/nexera-logo.png";
+import logoImg from "@/assets/logo.png";
 
 export function Navbar() {
   return (
@@ -7,14 +7,13 @@ export function Navbar() {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50"
+      className="fixed inset-x-0 top-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/5"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <a href="#top" className="flex items-center gap-2">
-          <img src={nexeraLogo} alt="Nexera" width={36} height={36} className="h-9 w-9 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.25)]" />
-          <span className="text-base font-semibold tracking-[0.18em]">NEXERA</span>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="#top" className="flex items-center">
+          <img src={logoImg} alt="Nexera Logo" className="h-9 w-auto object-contain" />
         </a>
-        <a href="#cta" className="rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-black transition-transform hover:scale-[1.02]">Book Demo</a>
+        <a href="#cta" className="rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-[13px] font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">Book Demo</a>
       </div>
     </motion.nav>
   );
