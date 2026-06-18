@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import logoImg from "@/assets/logo.png";
 import {
   PhoneCall, MessageSquare, ClipboardCheck, CalendarClock, Workflow, Clock,
@@ -272,9 +273,9 @@ export function FinalCTA() {
         </motion.h2>
         <p className="mt-6 max-w-xl text-lg text-muted-foreground">Deploy AI employees in days, not months.</p>
         <div className="mt-10 flex flex-wrap gap-3">
-          <a href="#" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
+          <Link to="/book-demo" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
             Book Demo <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
           <a href="#" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/10">
             Talk to Sales
           </a>
@@ -443,9 +444,9 @@ export function RoiCalculator() {
                 <div className="text-xs text-muted-foreground">Total Monthly Value Generated</div>
                 <div className="text-3xl font-black text-gradient">${monthlySavings.toLocaleString()}</div>
               </div>
-              <a href="#cta" className="rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-xs font-bold text-black transition-transform hover:scale-[1.03]">
+              <Link to="/book-demo" className="rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-xs font-bold text-black transition-transform hover:scale-[1.03]">
                 Claim Your ROI
-              </a>
+              </Link>
             </div>
           </div>
         </div>

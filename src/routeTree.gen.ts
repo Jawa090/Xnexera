@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DpaRouteImport } from './routes/dpa'
+import { Route as BookDemoRouteImport } from './routes/book-demo'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
@@ -30,6 +31,11 @@ const DpaRoute = DpaRouteImport.update({
   path: '/dpa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookDemoRoute = BookDemoRouteImport.update({
+  id: '/book-demo',
+  path: '/book-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book-demo': typeof BookDemoRoute
   '/dpa': typeof DpaRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book-demo': typeof BookDemoRoute
   '/dpa': typeof DpaRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book-demo': typeof BookDemoRoute
   '/dpa': typeof DpaRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -65,14 +74,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dpa' | '/privacy' | '/terms' | '/api/chat'
+  fullPaths: '/' | '/book-demo' | '/dpa' | '/privacy' | '/terms' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dpa' | '/privacy' | '/terms' | '/api/chat'
-  id: '__root__' | '/' | '/dpa' | '/privacy' | '/terms' | '/api/chat'
+  to: '/' | '/book-demo' | '/dpa' | '/privacy' | '/terms' | '/api/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/book-demo'
+    | '/dpa'
+    | '/privacy'
+    | '/terms'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookDemoRoute: typeof BookDemoRoute
   DpaRoute: typeof DpaRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
@@ -102,6 +119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DpaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book-demo': {
+      id: '/book-demo'
+      path: '/book-demo'
+      fullPath: '/book-demo'
+      preLoaderRoute: typeof BookDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookDemoRoute: BookDemoRoute,
   DpaRoute: DpaRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
