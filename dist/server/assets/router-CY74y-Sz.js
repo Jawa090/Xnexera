@@ -1,10 +1,11 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
+import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scripts, useRouterState, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
+import * as z from "zod";
 import { streamText, convertToModelMessages } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-const appCss = "/assets/styles-cYtYN1d_.css";
+const appCss = "/assets/styles-CBY2ON5l.css";
 const logoImg = "/assets/logo-icon-Ca2XHlNh.png";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
@@ -26,7 +27,7 @@ function ErrorComponent({ error, reset }) {
     }, className: "mt-6 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground", children: "Try again" })
   ] }) });
 }
-const Route$5 = createRootRouteWithContext()({
+const Route$6 = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -60,12 +61,47 @@ function RootShell({ children }) {
     ] })
   ] });
 }
-function RootComponent() {
-  const { queryClient } = Route$5.useRouteContext();
-  return /* @__PURE__ */ jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsx(Outlet, {}) });
+function HashScrollHandler() {
+  const location = useRouterState({ select: (s) => s.location });
+  useEffect(() => {
+    const hash = location.hash;
+    if (!hash) return;
+    const targetId = hash.startsWith("#") ? hash.slice(1) : hash;
+    if (!targetId) return;
+    let attempts = 0;
+    const maxAttempts = 50;
+    const checkAndScroll = () => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        return true;
+      }
+      return false;
+    };
+    if (checkAndScroll()) return;
+    const interval = setInterval(() => {
+      if (checkAndScroll()) {
+        clearInterval(interval);
+      } else {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
+        }
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, [location]);
+  return null;
 }
-const $$splitComponentImporter$3 = () => import("./terms-D-c_JjpA.js");
-const Route$4 = createFileRoute("/terms")({
+function RootComponent() {
+  const { queryClient } = Route$6.useRouteContext();
+  return /* @__PURE__ */ jsxs(QueryClientProvider, { client: queryClient, children: [
+    /* @__PURE__ */ jsx(HashScrollHandler, {}),
+    /* @__PURE__ */ jsx(Outlet, {})
+  ] });
+}
+const $$splitComponentImporter$4 = () => import("./terms-D-c_JjpA.js");
+const Route$5 = createFileRoute("/terms")({
   head: () => ({
     meta: [{
       title: "Terms of Service — Nexera"
@@ -74,10 +110,10 @@ const Route$4 = createFileRoute("/terms")({
       content: "Nexera terms of service."
     }]
   }),
-  component: lazyRouteComponent($$splitComponentImporter$3, "component")
+  component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$2 = () => import("./privacy-C_vDQvJW.js");
-const Route$3 = createFileRoute("/privacy")({
+const $$splitComponentImporter$3 = () => import("./privacy-C_vDQvJW.js");
+const Route$4 = createFileRoute("/privacy")({
   head: () => ({
     meta: [{
       title: "Privacy Policy — Nexera"
@@ -86,10 +122,10 @@ const Route$3 = createFileRoute("/privacy")({
       content: "Nexera privacy policy."
     }]
   }),
-  component: lazyRouteComponent($$splitComponentImporter$2, "component")
+  component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$1 = () => import("./dpa-CqaFfE27.js");
-const Route$2 = createFileRoute("/dpa")({
+const $$splitComponentImporter$2 = () => import("./dpa-CqaFfE27.js");
+const Route$3 = createFileRoute("/dpa")({
   head: () => ({
     meta: [{
       title: "Data Processing Agreement — Nexera"
@@ -98,9 +134,42 @@ const Route$2 = createFileRoute("/dpa")({
       content: "Nexera data processing agreement."
     }]
   }),
+  component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+const $$splitComponentImporter$1 = () => import("./book-demo-Dy4Ugl1x.js");
+z.object({
+  fullName: z.string().min(2, {
+    message: "Name must be at least 2 characters."
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address."
+  }),
+  phone: z.string().min(10, {
+    message: "Please enter a valid phone number."
+  }),
+  company: z.string().min(2, {
+    message: "Company name must be at least 2 characters."
+  }),
+  industry: z.string().min(1, {
+    message: "Please select an industry."
+  }),
+  volume: z.string().min(1, {
+    message: "Please select your call volume."
+  }),
+  message: z.string().optional()
+});
+const Route$2 = createFileRoute("/book-demo")({
+  head: () => ({
+    meta: [{
+      title: "Book a Demo — Nexera AI Voice Agents"
+    }, {
+      name: "description",
+      content: "Schedule a personalized walkthrough of Nexera and see our AI voice and chat agents in action."
+    }]
+  }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-B3WhugIz.js");
+const $$splitComponentImporter = () => import("./index-DNUP2Z31.js");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -160,39 +229,45 @@ const Route = createFileRoute("/api/chat")({
     }
   }
 });
-const TermsRoute = Route$4.update({
+const TermsRoute = Route$5.update({
   id: "/terms",
   path: "/terms",
-  getParentRoute: () => Route$5
+  getParentRoute: () => Route$6
 });
-const PrivacyRoute = Route$3.update({
+const PrivacyRoute = Route$4.update({
   id: "/privacy",
   path: "/privacy",
-  getParentRoute: () => Route$5
+  getParentRoute: () => Route$6
 });
-const DpaRoute = Route$2.update({
+const DpaRoute = Route$3.update({
   id: "/dpa",
   path: "/dpa",
-  getParentRoute: () => Route$5
+  getParentRoute: () => Route$6
+});
+const BookDemoRoute = Route$2.update({
+  id: "/book-demo",
+  path: "/book-demo",
+  getParentRoute: () => Route$6
 });
 const IndexRoute = Route$1.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$5
+  getParentRoute: () => Route$6
 });
 const ApiChatRoute = Route.update({
   id: "/api/chat",
   path: "/api/chat",
-  getParentRoute: () => Route$5
+  getParentRoute: () => Route$6
 });
 const rootRouteChildren = {
   IndexRoute,
+  BookDemoRoute,
   DpaRoute,
   PrivacyRoute,
   TermsRoute,
   ApiChatRoute
 };
-const routeTree = Route$5._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$6._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
   const router2 = createRouter({

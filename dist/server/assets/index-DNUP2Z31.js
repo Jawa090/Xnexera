@@ -1,16 +1,17 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { Link } from "@tanstack/react-router";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, Mic, CheckCircle2, Calendar, Database, FileText, PhoneCall, MessageSquare, ClipboardCheck, CalendarClock, Workflow, Clock, TrendingUp, ChevronRight, Sparkles, Cpu, UserCheck, ShieldCheck, Stethoscope, Home, Check, Shield, Lock, RefreshCw, Eye, ArrowRight, Pause, Play, Volume2, X, Send } from "lucide-react";
+import { l as logoImg } from "./logo-CA2-MQhC.js";
 import { useRef, useState, useEffect } from "react";
 import { SiHubspot, SiSalesforce, SiGoogle, SiTwilio, SiGooglecalendar, SiZapier, SiMake, SiN8N, SiSlack } from "react-icons/si";
 import { TbBrandOffice } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
-import { l as logoImg$1 } from "./router-D3dSwiJJ.js";
+import { l as logoImg$1 } from "./router-CY74y-Sz.js";
 import "@tanstack/react-query";
-import "@tanstack/react-router";
+import "zod";
 import "ai";
 import "@ai-sdk/openai-compatible";
-const logoImg = "/assets/logo-D5vu0Q87.png";
 function Navbar() {
   return /* @__PURE__ */ jsx(
     motion.nav,
@@ -20,8 +21,8 @@ function Navbar() {
       transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
       className: "fixed inset-x-0 top-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/5",
       children: /* @__PURE__ */ jsxs("div", { className: "mx-auto flex max-w-7xl items-center justify-between px-6 py-4", children: [
-        /* @__PURE__ */ jsx("a", { href: "#top", className: "flex items-center", children: /* @__PURE__ */ jsx("img", { src: logoImg, alt: "Nexera Logo", className: "h-9 w-auto object-contain" }) }),
-        /* @__PURE__ */ jsx("a", { href: "#cta", className: "rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-[13px] font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: "Book Demo" })
+        /* @__PURE__ */ jsx(Link, { to: "/", className: "flex items-center", children: /* @__PURE__ */ jsx("img", { src: logoImg, alt: "Nexera Logo", className: "h-9 w-auto object-contain" }) }),
+        /* @__PURE__ */ jsx(Link, { to: "/book-demo", className: "rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-[13px] font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: "Book Demo" })
       ] })
     }
   );
@@ -396,7 +397,7 @@ function FinalCTA() {
     ),
     /* @__PURE__ */ jsx("p", { className: "mt-6 max-w-xl text-lg text-muted-foreground", children: "Deploy AI employees in days, not months." }),
     /* @__PURE__ */ jsxs("div", { className: "mt-10 flex flex-wrap gap-3", children: [
-      /* @__PURE__ */ jsxs("a", { href: "#", className: "inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: [
+      /* @__PURE__ */ jsxs(Link, { to: "/book-demo", className: "inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: [
         "Book Demo ",
         /* @__PURE__ */ jsx(ArrowRight, { className: "h-4 w-4" })
       ] }),
@@ -564,7 +565,7 @@ function RoiCalculator() {
                 monthlySavings.toLocaleString()
               ] })
             ] }),
-            /* @__PURE__ */ jsx("a", { href: "#cta", className: "rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-xs font-bold text-black transition-transform hover:scale-[1.03]", children: "Claim Your ROI" })
+            /* @__PURE__ */ jsx(Link, { to: "/book-demo", className: "rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-5 py-2.5 text-xs font-bold text-black transition-transform hover:scale-[1.03]", children: "Claim Your ROI" })
           ] })
         ] })
       ] })
@@ -1272,7 +1273,7 @@ function Hero() {
         duration: 0.9,
         delay: 0.35
       }, className: "mt-10 flex flex-wrap items-center gap-3", children: [
-        /* @__PURE__ */ jsxs("a", { href: "#cta", className: "group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: [
+        /* @__PURE__ */ jsxs(Link, { to: "/book-demo", className: "group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]", children: [
           "Book Demo",
           /* @__PURE__ */ jsx(ArrowRight, { className: "h-4 w-4 transition-transform group-hover:translate-x-0.5" })
         ] }),

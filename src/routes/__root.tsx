@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -75,10 +76,51 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function HashScrollHandler() {
+  const location = useRouterState({ select: (s) => s.location });
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (!hash) return;
+    const targetId = hash.startsWith("#") ? hash.slice(1) : hash;
+    if (!targetId) return;
+
+    let attempts = 0;
+    const maxAttempts = 50; // Try for up to 2.5 seconds
+    const checkAndScroll = () => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        return true;
+      }
+      return false;
+    };
+
+    // Try immediately
+    if (checkAndScroll()) return;
+
+    const interval = setInterval(() => {
+      if (checkAndScroll()) {
+        clearInterval(interval);
+      } else {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          clearInterval(interval);
+        }
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [location]);
+
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <HashScrollHandler />
       <Outlet />
     </QueryClientProvider>
   );
