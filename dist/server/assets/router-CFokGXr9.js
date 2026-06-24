@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import * as z from "zod";
 import { streamText, convertToModelMessages } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-const appCss = "/assets/styles-CBY2ON5l.css";
+const appCss = "/assets/styles-cefHmG0Z.css";
 const logoImg = "/assets/logo-icon-Ca2XHlNh.png";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
@@ -100,7 +100,7 @@ function RootComponent() {
     /* @__PURE__ */ jsx(Outlet, {})
   ] });
 }
-const $$splitComponentImporter$4 = () => import("./terms-D-c_JjpA.js");
+const $$splitComponentImporter$4 = () => import("./terms-C30k8rWq.js");
 const Route$5 = createFileRoute("/terms")({
   head: () => ({
     meta: [{
@@ -112,7 +112,7 @@ const Route$5 = createFileRoute("/terms")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./privacy-C_vDQvJW.js");
+const $$splitComponentImporter$3 = () => import("./privacy-hkncv7-p.js");
 const Route$4 = createFileRoute("/privacy")({
   head: () => ({
     meta: [{
@@ -136,7 +136,7 @@ const Route$3 = createFileRoute("/dpa")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./book-demo-Dy4Ugl1x.js");
+const $$splitComponentImporter$1 = () => import("./book-demo-CUlmgyGI.js");
 z.object({
   fullName: z.string().min(2, {
     message: "Name must be at least 2 characters."
@@ -169,7 +169,7 @@ const Route$2 = createFileRoute("/book-demo")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-DNUP2Z31.js");
+const $$splitComponentImporter = () => import("./index-CmyS0B7J.js");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{

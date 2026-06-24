@@ -285,23 +285,106 @@ export function FinalCTA() {
   );
 }
 
+/* ---------- Trust Section ---------- */
+export function TrustSection() {
+  const trustItems = [
+    { icon: Clock, title: "24/7 Availability", desc: "Always on, never tired — handle calls around the clock" },
+    { icon: ClipboardCheck, title: "Lead Qualification", desc: "Intelligent scoring to identify your best prospects" },
+    { icon: CalendarClock, title: "Appointment Booking", desc: "Calendar-aware scheduling with conflict resolution" },
+    { icon: Workflow, title: "CRM Integration", desc: "Seamless sync with your existing business systems" },
+    { icon: MessageSquare, title: "Multilingual Support", desc: "Engage customers in their preferred language" },
+  ];
+
+  return (
+    <section id="trust" className="relative mx-auto max-w-7xl px-6 py-20">
+      <SectionHead 
+        eyebrow="Why Choose Us" 
+        title={<>Trusted By Growing Businesses</>} 
+      />
+      
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {trustItems.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="glass rounded-2xl p-6 text-center hover:border-white/15 transition-colors"
+            >
+              <div className="flex justify-center mb-4">
+                <div className="rounded-full bg-gradient-to-br from-[#ffd92c]/20 to-[#eb7d02]/20 p-3">
+                  <Icon className="h-6 w-6 text-[#ffd92c]" />
+                </div>
+              </div>
+              <h3 className="font-semibold tracking-tight text-white">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
+              <div className="mt-4 flex justify-center">
+                <Check className="h-5 w-5 text-[#eb7d02]" />
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Footer ---------- */
 export function Footer() {
   return (
     <footer className="border-t border-white/5">
       <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-12 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="flex items-center">
               <img src={logoImg} alt="Nexera Logo" loading="lazy" className="h-9 w-auto object-contain" />
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">AI voice and chat agents that answer, qualify, and book — 24/7.</p>
+            <div className="mt-6 space-y-2">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <span className="text-lg">📧</span>
+                <a href="mailto:support@xnexera.com" className="font-medium">support@xnexera.com</a>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <span className="text-lg">📞</span>
+                <a href="tel:+18005550199" className="font-medium">+1 (800) 555-0199</a>
+              </div>
+            </div>
           </div>
           <FooterCol title="Product" items={["Voice Agent", "Chat Agent", "Integrations", "Pricing"]} />
+          <FooterCol title="Company" items={["About", "Blog", "Careers", "Contact"]} />
+          <div>
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Follow Us</div>
+            <ul className="mt-4 space-y-3">
+              <li>
+                <a 
+                  href="https://www.linkedin.com/company/xnexera" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-sm text-foreground/80 transition-colors hover:text-foreground flex items-center gap-2"
+                >
+                  <span>in</span> LinkedIn
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.facebook.com/XNexEra" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-sm text-foreground/80 transition-colors hover:text-foreground flex items-center gap-2"
+                >
+                  <span>f</span> Facebook
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-xs text-muted-foreground md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} Nexera, Inc.</span>
-          <div className="flex gap-6"><a href="/privacy" className="hover:text-foreground">Privacy</a><a href="/terms" className="hover:text-foreground">Terms</a><a href="/dpa" className="hover:text-foreground">DPA</a></div>
+          <span>© {new Date().getFullYear()} XNEXERA. All Rights Reserved.</span>
+          <div className="flex gap-6"><a href="/privacy" className="hover:text-foreground">Privacy Policy</a><a href="/terms" className="hover:text-foreground">Terms & Conditions</a><a href="/dpa" className="hover:text-foreground">DPA</a></div>
         </div>
       </div>
     </footer>

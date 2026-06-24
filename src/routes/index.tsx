@@ -6,7 +6,7 @@ import { HeroDashboard } from "@/components/site/Dashboard";
 import {
   StatementSection, BentoSection, HowItWorks, IndustriesSection,
   MetricsSection, IntegrationsSection, FinalCTA, Footer,
-  RoiCalculator, ComparisonSection, DeploymentWorkflow, SecuritySection,
+  RoiCalculator, ComparisonSection, DeploymentWorkflow, SecuritySection, TrustSection,
 } from "@/components/site/Sections";
 import { DemoSection } from "@/components/site/DemoSection";
 import { ChatWidget } from "@/components/site/ChatWidget";
@@ -33,6 +33,7 @@ function Index() {
 
       <Navbar />
       <Hero />
+      <TrustSection />
       <StatementSection />
       <BentoSection />
       <RoiCalculator />

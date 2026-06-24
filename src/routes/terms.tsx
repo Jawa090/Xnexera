@@ -81,7 +81,14 @@ function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-semibold text-foreground tracking-tight">8. Changes to Terms</h2>
+              <h2 className="text-lg font-semibold text-foreground tracking-tight">8. Support & Contact</h2>
+              <p className="mt-3">
+                For customer support and inquiries, please contact us at <a href="mailto:support@xnexera.com" className="text-primary hover:text-primary/80 transition-colors font-medium">📧 support@xnexera.com</a>
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-semibold text-foreground tracking-tight">9. Changes to Terms</h2>
               <p className="mt-3">
                 We may modify these Terms at any time. Continued use of the services after changes constitutes acceptance of the revised Terms.
               </p>

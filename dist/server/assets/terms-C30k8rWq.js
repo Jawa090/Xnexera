@@ -47,7 +47,14 @@ function TermsPage() {
           /* @__PURE__ */ jsx("p", { className: "mt-3", children: "These Terms shall be governed by the laws of the State of Delaware, without regard to its conflict of law provisions." })
         ] }),
         /* @__PURE__ */ jsxs("section", { children: [
-          /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-foreground tracking-tight", children: "8. Changes to Terms" }),
+          /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-foreground tracking-tight", children: "8. Support & Contact" }),
+          /* @__PURE__ */ jsxs("p", { className: "mt-3", children: [
+            "For customer support and inquiries, please contact us at ",
+            /* @__PURE__ */ jsx("a", { href: "mailto:support@xnexera.com", className: "text-primary hover:text-primary/80 transition-colors font-medium", children: "📧 support@xnexera.com" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("section", { children: [
+          /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-foreground tracking-tight", children: "9. Changes to Terms" }),
           /* @__PURE__ */ jsx("p", { className: "mt-3", children: "We may modify these Terms at any time. Continued use of the services after changes constitutes acceptance of the revised Terms." })
         ] })
       ] })

@@ -454,6 +454,10 @@ function BookDemoPage() {
             /* @__PURE__ */ jsx("span", { className: "text-white font-medium", children: submittedData?.phone }),
             " to conduct a live custom sandbox testing session."
           ] }),
+          /* @__PURE__ */ jsxs("p", { className: "text-xs text-muted-foreground leading-relaxed", children: [
+            "For immediate support, contact us at ",
+            /* @__PURE__ */ jsx("a", { href: "mailto:support@xnexera.com", className: "text-[#ffd92c] hover:text-white transition-colors font-medium", children: "📧 support@xnexera.com" })
+          ] }),
           /* @__PURE__ */ jsxs("div", { className: "p-3 bg-[#eb7d02]/5 border border-[#eb7d02]/20 rounded-xl flex items-start gap-3 mt-2", children: [
             /* @__PURE__ */ jsx(PhoneCall, { className: "h-4 w-4 text-[#ffd92c] shrink-0 mt-0.5" }),
             /* @__PURE__ */ jsxs("span", { className: "text-[11px] text-[#ffd92c] leading-normal font-medium", children: [

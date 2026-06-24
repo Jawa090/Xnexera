@@ -70,7 +70,10 @@ function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-semibold text-foreground tracking-tight">6. Contact Us</h2>
+              <h2 className="text-lg font-semibold text-foreground tracking-tight">6. Support & Contact</h2>
+              <p className="mt-3">
+                For customer support, please reach out to us at <a href="mailto:support@xnexera.com" className="text-primary hover:text-primary/80 transition-colors font-medium">📧 support@xnexera.com</a>
+              </p>
               <p className="mt-3">
                 If you have questions about this Privacy Policy, please contact us at privacy@nexera.com.
               </p>

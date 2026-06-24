@@ -40,7 +40,11 @@ function PrivacyPage() {
           /* @__PURE__ */ jsx("p", { className: "mt-3", children: "We implement appropriate technical and organizational measures to protect your data. However, no method of transmission over the internet is completely secure." })
         ] }),
         /* @__PURE__ */ jsxs("section", { children: [
-          /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-foreground tracking-tight", children: "6. Contact Us" }),
+          /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-foreground tracking-tight", children: "6. Support & Contact" }),
+          /* @__PURE__ */ jsxs("p", { className: "mt-3", children: [
+            "For customer support, please reach out to us at ",
+            /* @__PURE__ */ jsx("a", { href: "mailto:support@xnexera.com", className: "text-primary hover:text-primary/80 transition-colors font-medium", children: "📧 support@xnexera.com" })
+          ] }),
           /* @__PURE__ */ jsx("p", { className: "mt-3", children: "If you have questions about this Privacy Policy, please contact us at privacy@nexera.com." })
         ] })
       ] })

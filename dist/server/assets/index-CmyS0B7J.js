@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Phone, Mic, CheckCircle2, Calendar, Database, FileText, PhoneCall, MessageSquare, ClipboardCheck, CalendarClock, Workflow, Clock, TrendingUp, ChevronRight, Sparkles, Cpu, UserCheck, ShieldCheck, Stethoscope, Home, Check, Shield, Lock, RefreshCw, Eye, ArrowRight, Pause, Play, Volume2, X, Send } from "lucide-react";
+import { Phone, Mic, CheckCircle2, Calendar, Database, FileText, Clock, ClipboardCheck, CalendarClock, Workflow, MessageSquare, Check, PhoneCall, TrendingUp, ChevronRight, Sparkles, Cpu, UserCheck, ShieldCheck, Stethoscope, Home, Shield, Lock, RefreshCw, Eye, ArrowRight, Pause, Play, Volume2, X, Send } from "lucide-react";
 import { l as logoImg } from "./logo-CA2-MQhC.js";
 import { useRef, useState, useEffect } from "react";
 import { SiHubspot, SiSalesforce, SiGoogle, SiTwilio, SiGooglecalendar, SiZapier, SiMake, SiN8N, SiSlack } from "react-icons/si";
 import { TbBrandOffice } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
-import { l as logoImg$1 } from "./router-CY74y-Sz.js";
+import { l as logoImg$1 } from "./router-CFokGXr9.js";
 import "@tanstack/react-query";
 import "zod";
 import "ai";
@@ -405,24 +405,104 @@ function FinalCTA() {
     ] })
   ] }) });
 }
+function TrustSection() {
+  const trustItems = [
+    { icon: Clock, title: "24/7 Availability", desc: "Always on, never tired — handle calls around the clock" },
+    { icon: ClipboardCheck, title: "Lead Qualification", desc: "Intelligent scoring to identify your best prospects" },
+    { icon: CalendarClock, title: "Appointment Booking", desc: "Calendar-aware scheduling with conflict resolution" },
+    { icon: Workflow, title: "CRM Integration", desc: "Seamless sync with your existing business systems" },
+    { icon: MessageSquare, title: "Multilingual Support", desc: "Engage customers in their preferred language" }
+  ];
+  return /* @__PURE__ */ jsxs("section", { id: "trust", className: "relative mx-auto max-w-7xl px-6 py-20", children: [
+    /* @__PURE__ */ jsx(
+      SectionHead,
+      {
+        eyebrow: "Why Choose Us",
+        title: /* @__PURE__ */ jsx(Fragment, { children: "Trusted By Growing Businesses" })
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "grid gap-6 sm:grid-cols-2 lg:grid-cols-5", children: trustItems.map((item, idx) => {
+      const Icon = item.icon;
+      return /* @__PURE__ */ jsxs(
+        motion.div,
+        {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true },
+          transition: { duration: 0.5, delay: idx * 0.08 },
+          className: "glass rounded-2xl p-6 text-center hover:border-white/15 transition-colors",
+          children: [
+            /* @__PURE__ */ jsx("div", { className: "flex justify-center mb-4", children: /* @__PURE__ */ jsx("div", { className: "rounded-full bg-gradient-to-br from-[#ffd92c]/20 to-[#eb7d02]/20 p-3", children: /* @__PURE__ */ jsx(Icon, { className: "h-6 w-6 text-[#ffd92c]" }) }) }),
+            /* @__PURE__ */ jsx("h3", { className: "font-semibold tracking-tight text-white", children: item.title }),
+            /* @__PURE__ */ jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: item.desc }),
+            /* @__PURE__ */ jsx("div", { className: "mt-4 flex justify-center", children: /* @__PURE__ */ jsx(Check, { className: "h-5 w-5 text-[#eb7d02]" }) })
+          ]
+        },
+        idx
+      );
+    }) })
+  ] });
+}
 function Footer() {
   return /* @__PURE__ */ jsx("footer", { className: "border-t border-white/5", children: /* @__PURE__ */ jsxs("div", { className: "mx-auto max-w-7xl px-6 py-20", children: [
-    /* @__PURE__ */ jsxs("div", { className: "grid gap-12 md:grid-cols-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "grid gap-12 md:grid-cols-5", children: [
       /* @__PURE__ */ jsxs("div", { className: "md:col-span-2", children: [
         /* @__PURE__ */ jsx("div", { className: "flex items-center", children: /* @__PURE__ */ jsx("img", { src: logoImg, alt: "Nexera Logo", loading: "lazy", className: "h-9 w-auto object-contain" }) }),
-        /* @__PURE__ */ jsx("p", { className: "mt-4 max-w-sm text-sm text-muted-foreground", children: "AI voice and chat agents that answer, qualify, and book — 24/7." })
+        /* @__PURE__ */ jsx("p", { className: "mt-4 max-w-sm text-sm text-muted-foreground", children: "AI voice and chat agents that answer, qualify, and book — 24/7." }),
+        /* @__PURE__ */ jsxs("div", { className: "mt-6 space-y-2", children: [
+          /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors", children: [
+            /* @__PURE__ */ jsx("span", { className: "text-lg", children: "📧" }),
+            /* @__PURE__ */ jsx("a", { href: "mailto:support@xnexera.com", className: "font-medium", children: "support@xnexera.com" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors", children: [
+            /* @__PURE__ */ jsx("span", { className: "text-lg", children: "📞" }),
+            /* @__PURE__ */ jsx("a", { href: "tel:+18005550199", className: "font-medium", children: "+1 (800) 555-0199" })
+          ] })
+        ] })
       ] }),
-      /* @__PURE__ */ jsx(FooterCol, { title: "Product", items: ["Voice Agent", "Chat Agent", "Integrations", "Pricing"] })
+      /* @__PURE__ */ jsx(FooterCol, { title: "Product", items: ["Voice Agent", "Chat Agent", "Integrations", "Pricing"] }),
+      /* @__PURE__ */ jsx(FooterCol, { title: "Company", items: ["About", "Blog", "Careers", "Contact"] }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx("div", { className: "text-xs uppercase tracking-[0.2em] text-muted-foreground", children: "Follow Us" }),
+        /* @__PURE__ */ jsxs("ul", { className: "mt-4 space-y-3", children: [
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
+            "a",
+            {
+              href: "https://www.linkedin.com/company/xnexera",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: "text-sm text-foreground/80 transition-colors hover:text-foreground flex items-center gap-2",
+              children: [
+                /* @__PURE__ */ jsx("span", { children: "in" }),
+                " LinkedIn"
+              ]
+            }
+          ) }),
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsxs(
+            "a",
+            {
+              href: "https://www.facebook.com/XNexEra",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: "text-sm text-foreground/80 transition-colors hover:text-foreground flex items-center gap-2",
+              children: [
+                /* @__PURE__ */ jsx("span", { children: "f" }),
+                " Facebook"
+              ]
+            }
+          ) })
+        ] })
+      ] })
     ] }),
     /* @__PURE__ */ jsxs("div", { className: "mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-xs text-muted-foreground md:flex-row md:items-center", children: [
       /* @__PURE__ */ jsxs("span", { children: [
         "© ",
         (/* @__PURE__ */ new Date()).getFullYear(),
-        " Nexera, Inc."
+        " XNEXERA. All Rights Reserved."
       ] }),
       /* @__PURE__ */ jsxs("div", { className: "flex gap-6", children: [
-        /* @__PURE__ */ jsx("a", { href: "/privacy", className: "hover:text-foreground", children: "Privacy" }),
-        /* @__PURE__ */ jsx("a", { href: "/terms", className: "hover:text-foreground", children: "Terms" }),
+        /* @__PURE__ */ jsx("a", { href: "/privacy", className: "hover:text-foreground", children: "Privacy Policy" }),
+        /* @__PURE__ */ jsx("a", { href: "/terms", className: "hover:text-foreground", children: "Terms & Conditions" }),
         /* @__PURE__ */ jsx("a", { href: "/dpa", className: "hover:text-foreground", children: "DPA" })
       ] })
     ] })
@@ -1208,6 +1288,7 @@ function Index() {
     ] }),
     /* @__PURE__ */ jsx(Navbar, {}),
     /* @__PURE__ */ jsx(Hero, {}),
+    /* @__PURE__ */ jsx(TrustSection, {}),
     /* @__PURE__ */ jsx(StatementSection, {}),
     /* @__PURE__ */ jsx(BentoSection, {}),
     /* @__PURE__ */ jsx(RoiCalculator, {}),
