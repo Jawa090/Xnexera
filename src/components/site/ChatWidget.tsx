@@ -48,7 +48,7 @@ export function ChatWidget() {
       role: "user",
       text: trimmed,
     };
-    
+
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsLoading(true);
@@ -57,16 +57,16 @@ export function ChatWidget() {
     const normText = trimmed.toLowerCase().replace(/[?,.!]/g, "").trim();
     let responseText = "";
 
-    const isGreeting = 
-      normText === "hi" || normText === "hello" || normText === "hey" || 
+    const isGreeting =
+      normText === "hi" || normText === "hello" || normText === "hey" ||
       normText === "hlo" || normText === "yo" ||
-      normText.startsWith("hi ") || normText.startsWith("hello ") || 
+      normText.startsWith("hi ") || normText.startsWith("hello ") ||
       normText.startsWith("hey ") || normText.startsWith("hlo ");
 
-    const isWhatDo = 
-      normText.includes("what you do") || normText.includes("what do you") || 
-      normText.includes("what does nexera") || normText.includes("what is nexera") || 
-      normText.includes("who are you") || normText.includes("who is ava") || 
+    const isWhatDo =
+      normText.includes("what you do") || normText.includes("what do you") ||
+      normText.includes("what does nexera") || normText.includes("what is nexera") ||
+      normText.includes("who are you") || normText.includes("who is ava") ||
       normText.includes("what you doo") || normText.includes("what nexera do") ||
       normText.includes("what is this") || normText.includes("about nexera");
 
@@ -118,25 +118,25 @@ export function ChatWidget() {
     await new Promise((resolve) => setTimeout(resolve, 600));
 
     const assistantMsgId = Date.now().toString() + "-assistant";
-    
+
     // Add empty assistant response to begin typing stream
     setMessages((prev) => [...prev, { id: assistantMsgId, role: "assistant", text: "" }]);
-    
+
     const words = responseText.split(" ");
     let currentText = "";
-    
+
     for (let i = 0; i < words.length; i++) {
       currentText += words[i] + (i === words.length - 1 ? "" : " ");
-      
+
       // Update last message
       setMessages((prev) =>
         prev.map((m) => (m.id === assistantMsgId ? { ...m, text: currentText } : m))
       );
-      
+
       // Delay to simulate typing (word by word)
       await new Promise((resolve) => setTimeout(resolve, 25 + Math.random() * 20));
     }
-    
+
     setIsLoading(false);
   };
 

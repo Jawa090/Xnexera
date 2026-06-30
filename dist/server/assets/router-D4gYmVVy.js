@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import * as z from "zod";
 import { streamText, convertToModelMessages } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-const appCss = "/assets/styles-cefHmG0Z.css";
+const appCss = "/assets/styles-DG0wGIoQ.css";
 const logoImg = "/assets/logo-icon-Ca2XHlNh.png";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
@@ -42,20 +42,52 @@ const Route$6 = createRootRouteWithContext()({
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" },
+      { rel: "preload", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap", as: "style" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: logoImg, type: "image/png" }
+    ],
+    scripts: [
+      {
+        children: `
+          (function(){
+            var l=document.createElement('link');
+            l.rel='stylesheet';
+            l.href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap';
+            l.media='print';
+            l.onload=function(){this.media='all'};
+            document.head.appendChild(l);
+          })();
+        `
+      }
     ]
   }),
   shellComponent: RootShell,
   component: RootComponent,
+  pendingComponent: PendingComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent
 });
+function PendingComponent() {
+  return /* @__PURE__ */ jsx("div", { style: { display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#000", color: "#f5f5f7" }, children: /* @__PURE__ */ jsxs("div", { style: { textAlign: "center" }, children: [
+    /* @__PURE__ */ jsx("div", { style: { width: 40, height: 40, border: "3px solid rgba(255,255,255,0.1)", borderTopColor: "#eb7d02", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto" } }),
+    /* @__PURE__ */ jsx("p", { style: { marginTop: 16, fontSize: 14, color: "#8a8a93" }, children: "Loading…" })
+  ] }) });
+}
 function RootShell({ children }) {
   return /* @__PURE__ */ jsxs("html", { lang: "en", className: "dark", children: [
-    /* @__PURE__ */ jsx("head", { children: /* @__PURE__ */ jsx(HeadContent, {}) }),
+    /* @__PURE__ */ jsxs("head", { children: [
+      /* @__PURE__ */ jsx(HeadContent, {}),
+      /* @__PURE__ */ jsx("style", { dangerouslySetInnerHTML: { __html: `
+          html,body{background:#000;color:#f5f5f7;margin:0;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+          @keyframes spin{to{transform:rotate(360deg)}}
+        ` } })
+    ] }),
     /* @__PURE__ */ jsxs("body", { className: "bg-background text-foreground antialiased", children: [
+      /* @__PURE__ */ jsx("noscript", { children: /* @__PURE__ */ jsx("div", { style: { padding: "3rem 1.5rem", textAlign: "center", background: "#000", color: "#f5f5f7", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }, children: /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx("h1", { style: { fontSize: "1.5rem", fontWeight: 600 }, children: "Nexera — AI Voice Agents" }),
+        /* @__PURE__ */ jsx("p", { style: { marginTop: "1rem", color: "#8a8a93" }, children: "Please enable JavaScript to use this site." }),
+        /* @__PURE__ */ jsx("a", { href: "mailto:support@xnexera.com", style: { marginTop: "1.5rem", display: "inline-block", color: "#eb7d02" }, children: "Contact us: support@xnexera.com" })
+      ] }) }) }),
       children,
       /* @__PURE__ */ jsx(Scripts, {})
     ] })
@@ -169,7 +201,7 @@ const Route$2 = createFileRoute("/book-demo")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-CmyS0B7J.js");
+const $$splitComponentImporter = () => import("./index-DLLW0Znn.js");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{

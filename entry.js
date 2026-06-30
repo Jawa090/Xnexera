@@ -54,7 +54,22 @@ http.createServer(async (req, res) => {
 
     if (fs.existsSync(localFilePath) && fs.statSync(localFilePath).isFile()) {
       const mimeType = getMimeType(localFilePath);
-      res.writeHead(200, { "Content-Type": mimeType });
+      const headers = { "Content-Type": mimeType };
+
+      // Immutable cache for hashed assets (JS, CSS, images in /assets/)
+      if (safePath.startsWith("/assets/")) {
+        headers["Cache-Control"] = "public, max-age=31536000, immutable";
+      } else {
+        headers["Cache-Control"] = "public, max-age=3600";
+      }
+
+      // CORS for font files (needed when loaded cross-origin)
+      const ext = path.extname(localFilePath).toLowerCase();
+      if ([".woff", ".woff2", ".ttf"].includes(ext)) {
+        headers["Access-Control-Allow-Origin"] = "*";
+      }
+
+      res.writeHead(200, headers);
       fs.createReadStream(localFilePath).pipe(res);
       return;
     }

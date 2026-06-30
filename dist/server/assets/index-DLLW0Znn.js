@@ -7,7 +7,7 @@ import { useRef, useState, useEffect } from "react";
 import { SiHubspot, SiSalesforce, SiGoogle, SiTwilio, SiGooglecalendar, SiZapier, SiMake, SiN8N, SiSlack } from "react-icons/si";
 import { TbBrandOffice } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
-import { l as logoImg$1 } from "./router-CFokGXr9.js";
+import { l as logoImg$1 } from "./router-D4gYmVVy.js";
 import "@tanstack/react-query";
 import "zod";
 import "ai";

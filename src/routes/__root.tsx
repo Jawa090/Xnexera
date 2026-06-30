@@ -53,22 +53,64 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" },
+      { rel: "preload", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap", as: "style" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: logoImg, type: "image/png" },
+    ],
+    scripts: [
+      {
+        children: `
+          (function(){
+            var l=document.createElement('link');
+            l.rel='stylesheet';
+            l.href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap';
+            l.media='print';
+            l.onload=function(){this.media='all'};
+            document.head.appendChild(l);
+          })();
+        `,
+      },
     ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
+  pendingComponent: PendingComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
+function PendingComponent() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#000", color: "#f5f5f7" }}>
+      <div style={{ textAlign: "center" }}>
+        <div style={{ width: 40, height: 40, border: "3px solid rgba(255,255,255,0.1)", borderTopColor: "#eb7d02", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto" }} />
+        <p style={{ marginTop: 16, fontSize: 14, color: "#8a8a93" }}>Loading…</p>
+      </div>
+    </div>
+  );
+}
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head><HeadContent /></head>
+      <head>
+        <HeadContent />
+        {/* Critical inline CSS — ensures page isn't white/blank while external CSS loads */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          html,body{background:#000;color:#f5f5f7;margin:0;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+          @keyframes spin{to{transform:rotate(360deg)}}
+        ` }} />
+      </head>
       <body className="bg-background text-foreground antialiased">
+        <noscript>
+          <div style={{ padding: "3rem 1.5rem", textAlign: "center", background: "#000", color: "#f5f5f7", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div>
+              <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>Nexera — AI Voice Agents</h1>
+              <p style={{ marginTop: "1rem", color: "#8a8a93" }}>Please enable JavaScript to use this site.</p>
+              <a href="mailto:support@xnexera.com" style={{ marginTop: "1.5rem", display: "inline-block", color: "#eb7d02" }}>Contact us: support@xnexera.com</a>
+            </div>
+          </div>
+        </noscript>
         {children}
         <Scripts />
       </body>

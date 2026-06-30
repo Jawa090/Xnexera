@@ -2,6 +2,19 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Force swap display for Google Fonts — prevents invisible text on slow/blocked networks */
+@font-face {
+  font-family: "Inter";
+  font-display: swap;
+  src: local("Inter"), local("Inter-Regular");
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-display: swap;
+  src: local("Inter Tight"), local("InterTight-Regular");
+}
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
