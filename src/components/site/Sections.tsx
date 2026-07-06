@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import logoImg from "@/assets/logo.png";
 import {
   PhoneCall, MessageSquare, ClipboardCheck, CalendarClock, Workflow, Clock,
-  ArrowRight, Stethoscope, Home, ChevronRight,
+  ArrowRight, Stethoscope, Home, ChevronRight, Play,
   DollarSign, TrendingUp, Check,
   Cpu, UserCheck, ShieldCheck, Sparkles, Lock, Shield, Eye, RefreshCw,
 } from "lucide-react";
@@ -24,8 +24,8 @@ export function StatementSection() {
     "Now you can too.",
   ];
   return (
-    <section ref={ref} className="relative mx-auto max-w-6xl px-6 py-20">
-      <h2 className="text-balance text-[clamp(2.5rem,6.5vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+    <section ref={ref} className="relative mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+      <h2 className="text-balance text-[clamp(2rem,5.5vw,4.5rem)] sm:text-[clamp(2.5rem,6.5vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
         {lines.map((line, i) => (
           <motion.span
             key={i}
@@ -51,11 +51,25 @@ const features = [
   { icon: Workflow, title: "CRM Automation", desc: "Bi-directional sync to your stack — no glue code." },
   { icon: Clock, title: "24/7 Availability", desc: "Nights, weekends, holidays — zero hold time." },
 ];
+
+function SectionHead({ eyebrow, title }: { eyebrow: string; title: React.ReactNode }) {
+  return (
+    <div className="mb-8 sm:mb-12 lg:mb-16 max-w-4xl">
+      <div className="mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        <span className="h-1 w-1 rounded-full bg-primary" /> {eyebrow}
+      </div>
+      <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] sm:text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-gradient">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
 export function BentoSection() {
   return (
-    <section id="solutions" className="relative mx-auto max-w-7xl px-6 py-20">
+    <section id="solutions" className="relative mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
       <SectionHead eyebrow="Platform" title={<>Built for revenue teams<br /><span className="text-muted-foreground">that can't afford to miss.</span></>} />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[220px]">
+      <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-4 md:auto-rows-[200px] lg:auto-rows-[220px]">
         {features.map((f, i) => (
           <motion.div
             key={f.title}
@@ -63,13 +77,13 @@ export function BentoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-            className={`glass group relative overflow-hidden rounded-2xl p-6 transition-colors hover:border-white/15 ${f.span ?? ""}`}
+            className={`glass group relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-colors hover:border-white/15 ${f.span ?? ""}`}
           >
-            <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div aria-hidden className="pointer-events-none absolute -right-16 sm:-right-20 -top-16 sm:-top-20 h-48 sm:h-56 w-48 sm:w-56 rounded-full bg-primary/10 blur-2xl sm:blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="flex h-full flex-col justify-between">
-              <f.icon className="h-5 w-5 text-primary" />
+              <f.icon className="h-4 sm:h-5 w-4 sm:w-5 text-primary" />
               <div>
-                <h3 className="text-xl font-semibold tracking-tight">{f.title}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold tracking-tight">{f.title}</h3>
                 <p className="mt-2 max-w-md text-sm text-muted-foreground">{f.desc}</p>
               </div>
             </div>
@@ -91,10 +105,10 @@ const steps = [
 ];
 export function HowItWorks() {
   return (
-    <section className="relative mx-auto max-w-6xl px-6 py-20">
+    <section className="relative mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
       <SectionHead eyebrow="Workflow" title={<>From ring to revenue,<br /><span className="text-muted-foreground">in under two minutes.</span></>} />
       <div className="relative">
-        <div aria-hidden className="absolute left-6 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-white/10 to-transparent md:block" />
+        <div aria-hidden className="absolute left-4 sm:left-6 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-white/10 to-transparent md:block" />
         <ol className="space-y-3">
           {steps.map((s, i) => (
             <motion.li
@@ -103,17 +117,17 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="glass relative flex items-center gap-5 rounded-2xl p-5 md:ml-12"
+              className="glass relative flex items-center gap-3 sm:gap-4 lg:gap-5 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:ml-8 lg:ml-12"
             >
-              <span className="absolute -left-[3.25rem] hidden h-3 w-3 rounded-full border border-primary/40 bg-background md:flex">
-                <span className="m-auto h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="absolute -left-[2.25rem] sm:-left-[2.75rem] lg:-left-[3.25rem] hidden h-2.5 sm:h-3 w-2.5 sm:w-3 rounded-full border border-primary/40 bg-background md:flex">
+                <span className="m-auto h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-primary" />
               </span>
-              <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
-              <div className="flex-1">
-                <div className="text-lg font-medium tracking-tight">{s.t}</div>
+              <span className="font-mono text-[10px] sm:text-xs text-muted-foreground min-w-[1.5rem] sm:min-w-[2rem]">0{i + 1}</span>
+              <div className="flex-1 min-w-0">
+                <div className="text-base sm:text-lg font-medium tracking-tight">{s.t}</div>
                 <div className="text-sm text-muted-foreground">{s.d}</div>
               </div>
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              <ChevronRight className="h-3.5 sm:h-4 w-3.5 sm:w-4 text-muted-foreground shrink-0" />
             </motion.li>
           ))}
         </ol>
@@ -125,9 +139,9 @@ export function HowItWorks() {
 /* ---------- Industries ---------- */
 export function IndustriesSection() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
       <SectionHead eyebrow="Industries" title={<>Two industries.<br /><span className="text-muted-foreground">Purpose-built playbooks.</span></>} />
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
         <IndustryCard
           id="healthcare"
           icon={Stethoscope}
@@ -164,26 +178,26 @@ function IndustryCard({ id, icon: Icon, name, headline, desc, metrics }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="glass group relative overflow-hidden rounded-3xl p-8"
+      className="glass group relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8"
     >
-      <div aria-hidden className="absolute -top-32 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+      <div aria-hidden className="absolute -top-24 sm:-top-32 right-0 h-56 sm:h-72 w-56 sm:w-72 rounded-full bg-primary/10 blur-2xl sm:blur-3xl" />
       <div className="relative">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          <Icon className="h-3.5 w-3.5" /> {name}
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          <Icon className="h-3 sm:h-3.5 w-3 sm:w-3.5" /> {name}
         </div>
-        <h3 className="mt-6 max-w-md text-4xl font-semibold tracking-tight">{headline}</h3>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">{desc}</p>
+        <h3 className="mt-4 sm:mt-6 max-w-md text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">{headline}</h3>
+        <p className="mt-3 sm:mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">{desc}</p>
 
-        <div className="mt-8 grid grid-cols-3 gap-3">
+        <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3">
           {metrics.map((m: any) => (
-            <div key={m.k} className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
-              <div className="text-2xl font-semibold tracking-tight">{m.v}</div>
-              <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">{m.k}</div>
+            <div key={m.k} className="rounded-lg sm:rounded-xl border border-white/5 bg-white/[0.02] p-2 sm:p-3">
+              <div className="text-xl sm:text-2xl font-semibold tracking-tight">{m.v}</div>
+              <div className="mt-1 text-[10px] sm:text-[11px] uppercase tracking-wider text-muted-foreground">{m.k}</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 inline-flex items-center gap-2 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100">
+        <div className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-sm text-primary opacity-80 transition-opacity group-hover:opacity-100">
           Explore the {name.toLowerCase()} playbook <ArrowRight className="h-3.5 w-3.5" />
         </div>
       </div>
@@ -203,9 +217,9 @@ export function MetricsSection() {
     { v: "24/7", l: "Coverage" },
   ];
   return (
-    <section ref={ref} className="relative overflow-hidden py-24">
+    <section ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <motion.div style={{ y }} aria-hidden className="absolute inset-0 -z-10 grid-bg opacity-40" />
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-px overflow-hidden rounded-3xl border border-white/5 bg-white/5 px-0 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-px overflow-hidden rounded-2xl sm:rounded-3xl border border-white/5 bg-white/5 px-0 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <motion.div
             key={s.l}
@@ -213,10 +227,10 @@ export function MetricsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: i * 0.1 }}
-            className="bg-background p-10"
+            className="bg-background p-6 sm:p-8 lg:p-10 text-center sm:text-left"
           >
-            <div className="text-[clamp(3.5rem,7vw,6rem)] font-semibold leading-none tracking-[-0.05em] text-gradient">{s.v}</div>
-            <div className="mt-4 text-sm text-muted-foreground">{s.l}</div>
+            <div className="text-[clamp(2.5rem,6vw,4.5rem)] sm:text-[clamp(3.5rem,7vw,6rem)] font-semibold leading-none tracking-[-0.05em] text-gradient">{s.v}</div>
+            <div className="mt-2 sm:mt-4 text-sm text-muted-foreground">{s.l}</div>
           </motion.div>
         ))}
       </div>
@@ -332,6 +346,294 @@ export function TrustSection() {
   );
 }
 
+/* ---------- Pricing Section ---------- */
+export function PricingSection() {
+  const [isAnnual, setIsAnnual] = useState(true);
+
+  const plans = [
+    {
+      name: "Starter",
+      description: "Perfect for small practices getting started",
+      monthlyPrice: 199,
+      annualPrice: 179, // 10% discount
+      features: [
+        "400 call minutes per month",
+        "Basic AI voice & chat agent",
+        "Standard playbooks (Healthcare/Real Estate)",
+        "HubSpot integration",
+        "Email support",
+        "Basic analytics dashboard",
+        "SMS confirmations",
+        "Calendar sync (Google Calendar)",
+      ],
+      limitations: [
+        "Single phone number",
+        "Standard voice quality",
+        "Basic reporting",
+      ],
+      cta: "Start Free Trial",
+      popular: false,
+    },
+    {
+      name: "Professional",
+      description: "Best for growing teams and practices",
+      monthlyPrice: 499,
+      annualPrice: 449, // 10% discount
+      features: [
+        "1,200 call minutes per month",
+        "Advanced AI with natural voices",
+        "Custom playbook builder",
+        "Multi-CRM integration (HubSpot, Salesforce, GoHighLevel)",
+        "Priority phone & email support",
+        "Advanced analytics & reporting",
+        "SMS, WhatsApp & web chat",
+        "Calendar sync (Google, Outlook, Cal.com)",
+        "Custom branding",
+        "Lead scoring & qualification rules",
+        "Appointment reminders",
+        "Team notifications (Slack integration)",
+      ],
+      limitations: [],
+      cta: "Start Free Trial",
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      description: "For large organizations with custom needs",
+      monthlyPrice: null,
+      annualPrice: null,
+      features: [
+        "Unlimited call minutes",
+        "Premium AI with voice cloning",
+        "Fully custom playbooks & workflows",
+        "All CRM integrations + custom APIs",
+        "Dedicated customer success manager",
+        "White-label solution available",
+        "Real-time analytics & custom reports",
+        "Omnichannel (Voice, SMS, WhatsApp, Web, Social)",
+        "Multiple phone numbers & locations",
+        "Advanced lead routing",
+        "Custom integrations & webhooks",
+        "99.9% uptime SLA",
+        "24/7 priority support",
+        "On-premise deployment option",
+      ],
+      limitations: [],
+      cta: "Contact Sales",
+      popular: false,
+    },
+  ];
+
+  return (
+    <section id="pricing" className="relative mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <SectionHead 
+        eyebrow="Pricing" 
+        title={
+          <>
+            Simple, transparent pricing.
+            <br />
+            <span className="text-muted-foreground">No hidden fees. Cancel anytime.</span>
+          </>
+        } 
+      />
+
+      {/* Annual/Monthly Toggle */}
+      <div className="flex items-center justify-center mb-12">
+        <div className="flex items-center gap-4 rounded-full bg-white/5 p-1 border border-white/10">
+          <button
+            onClick={() => setIsAnnual(false)}
+            className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${
+              !isAnnual
+                ? "bg-white text-black"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setIsAnnual(true)}
+            className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${
+              isAnnual
+                ? "bg-white text-black"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Annual
+            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] text-black font-semibold">
+              Save 10%
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Pricing Cards */}
+      <div className="grid gap-6 lg:gap-8 md:grid-cols-3">
+        {plans.map((plan, index) => (
+          <motion.div
+            key={plan.name}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.7, delay: index * 0.1 }}
+            className={`relative rounded-2xl lg:rounded-3xl p-6 lg:p-8 transition-all duration-300 ${
+              plan.popular
+                ? "glass border-primary/20 bg-gradient-to-b from-primary/5 to-transparent scale-105 lg:scale-110"
+                : "glass hover:border-white/20"
+            }`}
+          >
+            {plan.popular && (
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2">
+                <span className="inline-flex items-center rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-4 py-1 text-xs font-semibold text-black">
+                  Most Popular
+                </span>
+              </div>
+            )}
+
+            {/* Plan Header */}
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-foreground mb-2">{plan.name}</h3>
+              <p className="text-sm text-muted-foreground mb-6">{plan.description}</p>
+              
+              {/* Price */}
+              <div className="mb-6">
+                {plan.monthlyPrice ? (
+                  <>
+                    <div className="flex items-baseline justify-center gap-2">
+                      <span className="text-4xl lg:text-5xl font-bold text-gradient">
+                        ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                      </span>
+                      <span className="text-muted-foreground">/month</span>
+                    </div>
+                    {isAnnual && (
+                      <p className="text-xs text-success mt-2">
+                        Save ${(plan.monthlyPrice - plan.annualPrice) * 12}/year
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <div className="text-2xl font-semibold text-foreground">Custom Pricing</div>
+                )}
+              </div>
+
+              {/* CTA Button */}
+              <Link
+                to="/book-demo"
+                className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:scale-105 active:scale-95 w-full ${
+                  plan.popular
+                    ? "bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] text-black shadow-[0_4px_20px_rgba(235,125,2,0.25)]"
+                    : "border border-white/20 bg-white/5 text-foreground hover:bg-white/10"
+                }`}
+              >
+                {plan.cta}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* Features List */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                What's Included:
+              </h4>
+              <ul className="space-y-3">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-success mt-0.5 shrink-0" />
+                    <span className="text-sm text-foreground/90">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {plan.limitations.length > 0 && (
+                <div className="pt-4 border-t border-white/10">
+                  <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                    Limitations:
+                  </h5>
+                  <ul className="space-y-2">
+                    {plan.limitations.map((limitation, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <span className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0">—</span>
+                        <span className="text-xs text-muted-foreground">{limitation}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Additional Info */}
+      <div className="mt-16 text-center">
+        <div className="glass rounded-2xl p-6 lg:p-8 max-w-4xl mx-auto">
+          <h4 className="text-lg font-semibold text-foreground mb-4">
+            All plans include:
+          </h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Shield className="h-4 w-4 text-success" />
+              <span>SOC 2 Compliance</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock className="h-4 w-4 text-success" />
+              <span>HIPAA Ready</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <RefreshCw className="h-4 w-4 text-success" />
+              <span>99.99% Uptime</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Eye className="h-4 w-4 text-success" />
+              <span>Real-time Analytics</span>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="mt-16">
+        <h4 className="text-2xl font-semibold text-center text-foreground mb-8">
+          Frequently Asked Questions
+        </h4>
+        <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+          {[
+            {
+              q: "What happens if I exceed my call minutes?",
+              a: "Overage is charged at $0.50 per additional minute. We'll notify you when you reach 80% of your limit."
+            },
+            {
+              q: "Can I switch plans anytime?",
+              a: "Yes! Upgrade or downgrade your plan at any time. Changes take effect on your next billing cycle."
+            },
+            {
+              q: "Is there a setup fee?",
+              a: "No setup fees ever. We'll help you get configured and running within 15 minutes at no extra cost."
+            },
+            {
+              q: "What integrations are included?",
+              a: "All plans include standard integrations. Professional+ gets priority integration support and custom APIs."
+            },
+          ].map((faq, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="glass rounded-xl p-6"
+            >
+              <h5 className="text-sm font-semibold text-foreground mb-3">{faq.q}</h5>
+              <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Footer ---------- */
 export function Footer() {
   return (
@@ -355,7 +657,7 @@ export function Footer() {
             </div>
           </div>
           <FooterCol title="Product" items={["Voice Agent", "Chat Agent", "Integrations", "Pricing"]} />
-          <FooterCol title="Company" items={["About", "Blog", "Careers", "Contact"]} />
+          <FooterCol title="Company" items={[]} />
           <div>
             <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Follow Us</div>
             <ul className="mt-4 space-y-3">
@@ -390,6 +692,7 @@ export function Footer() {
     </footer>
   );
 }
+
 function FooterCol({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
@@ -717,17 +1020,5 @@ export function SecuritySection() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------- Shared ---------- */
-function SectionHead({ eyebrow, title }: { eyebrow: string; title: React.ReactNode }) {
-  return (
-    <div className="mb-14 max-w-3xl">
-      <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-        <span className="h-1 w-1 rounded-full bg-primary" /> {eyebrow}
-      </div>
-      <h2 className="text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-gradient">{title}</h2>
-    </div>
   );
 }

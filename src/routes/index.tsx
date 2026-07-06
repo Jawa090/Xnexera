@@ -6,7 +6,7 @@ import { HeroDashboard } from "@/components/site/Dashboard";
 import {
   StatementSection, BentoSection, HowItWorks, IndustriesSection,
   MetricsSection, IntegrationsSection, FinalCTA, Footer,
-  RoiCalculator, ComparisonSection, DeploymentWorkflow, SecuritySection, TrustSection,
+  RoiCalculator, ComparisonSection, DeploymentWorkflow, SecuritySection, TrustSection, PricingSection,
 } from "@/components/site/Sections";
 import { DemoSection } from "@/components/site/DemoSection";
 import { ChatWidget } from "@/components/site/ChatWidget";
@@ -41,6 +41,7 @@ function Index() {
       <DeploymentWorkflow />
       <IndustriesSection />
       <DemoSection />
+      <PricingSection />
       <ComparisonSection />
       <SecuritySection />
       <MetricsSection />
@@ -54,14 +55,14 @@ function Index() {
 
 function Hero() {
   return (
-    <section className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pb-16 pt-28 md:pt-36">
-      <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_1fr]">
-        <div>
+    <section className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 sm:px-6 pb-12 sm:pb-16 pt-24 sm:pt-28 md:pt-36">
+      <div className="grid items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-[1.05fr_1fr]">
+        <div className="order-2 lg:order-1">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
           >
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
@@ -74,7 +75,7 @@ function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 text-balance text-[clamp(3rem,7.2vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-gradient"
+            className="mt-5 sm:mt-7 text-balance text-[2.5rem] sm:text-[clamp(3rem,7.2vw,5.75rem)] font-semibold leading-[0.95] sm:leading-[0.98] tracking-[-0.045em] text-gradient"
           >
             AI Voice Agents that answer, qualify &amp; book leads 24/7.
           </motion.h1>
@@ -83,7 +84,7 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            className="mt-5 sm:mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground"
           >
             Deploy AI employees that answer calls, engage leads, schedule appointments, and update your systems — automatically.
           </motion.p>
@@ -92,13 +93,13 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3"
           >
-            <Link to="/book-demo" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
+            <Link to="/book-demo" className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ffd92c] to-[#eb7d02] px-6 py-3 text-sm font-semibold text-black transition-all hover:scale-[1.02] shadow-[0_4px_20px_rgba(235,125,2,0.25)] hover:shadow-[0_4px_25px_rgba(235,125,2,0.4)]">
               Book Demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a href="#demos" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/[0.08]">
+            <a href="#demos" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/[0.08]">
               <Play className="h-3.5 w-3.5" />
               Listen to Demo Call
             </a>
@@ -108,17 +109,21 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-14 flex items-center gap-6 text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
+            className="mt-10 sm:mt-14 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
           >
-            <span>SOC2 In Progress</span>
-            <span className="h-3 w-px bg-white/10" />
-            <span>HIPAA Aware</span>
-            <span className="h-3 w-px bg-white/10" />
-            <span>99.99% Uptime</span>
+            <div className="flex items-center gap-6">
+              <span>SOC2 In Progress</span>
+              <span className="hidden sm:block h-3 w-px bg-white/10" />
+              <span>HIPAA Aware</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <span className="hidden sm:block h-3 w-px bg-white/10" />
+              <span>99.99% Uptime</span>
+            </div>
           </motion.div>
         </div>
 
-        <div className="relative">
+        <div className="relative order-1 lg:order-2">
           <HeroDashboard />
         </div>
       </div>

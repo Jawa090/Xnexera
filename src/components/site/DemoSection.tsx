@@ -57,19 +57,19 @@ const demos: Demo[] = [
 
 export function DemoSection() {
   return (
-    <section id="demos" className="relative mx-auto max-w-7xl px-6 py-24">
-      <div className="mb-14 max-w-3xl">
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+    <section id="demos" className="relative mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div className="mb-10 sm:mb-12 lg:mb-14 max-w-3xl">
+        <div className="mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
           <span className="h-1 w-1 rounded-full bg-primary" /> Live Demos
         </div>
-        <h2 className="text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-gradient">
+        <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] sm:text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-gradient">
           Hear it answer a real call.
           <br />
           <span className="text-muted-foreground">Two industries. Zero hold time.</span>
         </h2>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
         {demos.map((d, i) => (
           <DemoPlayer key={d.id} demo={d} delay={i * 0.1} />
         ))}
@@ -196,43 +196,43 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="glass group relative overflow-hidden rounded-3xl p-6 md:p-8"
+      className="glass group relative overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8"
     >
-      <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+      <div aria-hidden className="pointer-events-none absolute -right-16 sm:-right-20 lg:-right-24 -top-16 sm:-top-20 lg:-top-24 h-56 sm:h-64 lg:h-72 w-56 sm:w-64 lg:w-72 rounded-full bg-primary/10 blur-2xl sm:blur-3xl opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            <Icon className="h-3.5 w-3.5" /> {demo.industry}
+      <div className="flex items-start justify-between gap-3 sm:gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <Icon className="h-3 sm:h-3.5 w-3 sm:w-3.5" /> {demo.industry}
           </div>
-          <h3 className="mt-3 text-2xl font-semibold tracking-tight">{demo.title}</h3>
+          <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-semibold tracking-tight">{demo.title}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{demo.subtitle}</p>
         </div>
         <button
           onClick={toggle}
           aria-label={playing ? "Pause demo" : "Play demo"}
-          className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+          className="relative flex h-12 sm:h-14 w-12 sm:w-14 shrink-0 items-center justify-center rounded-full bg-white text-black transition-transform hover:scale-105 active:scale-95 cursor-pointer"
         >
           {playing && (
             <span aria-hidden className="absolute inset-0 animate-pulse-ring rounded-full border border-white/40" />
           )}
-          {playing ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 translate-x-[1px]" />}
+          {playing ? <Pause className="h-4 sm:h-5 w-4 sm:w-5" /> : <Play className="h-4 sm:h-5 w-4 sm:w-5 translate-x-[1px]" />}
         </button>
       </div>
 
       {/* Waveform */}
-      <div className="mt-6 flex h-14 items-end gap-[3px]">
-        {Array.from({ length: 56 }).map((_, i) => {
-          const filled = i / 56 < progress;
+      <div className="mt-4 sm:mt-6 flex h-10 sm:h-14 items-end gap-[2px] sm:gap-[3px]">
+        {Array.from({ length: 40 }).map((_, i) => {
+          const filled = i / 40 < progress;
           // pseudo-random heights based on index
           const h = 18 + ((i * 37) % 100) * 0.42;
-          const isNearActive = playing && filled && Math.abs(i - (progress * 56)) < 6;
+          const isNearActive = playing && filled && Math.abs(i - (progress * 40)) < 6;
           
           return (
             <span
               key={i}
-              className="w-[3px] rounded-full"
+              className="w-[2px] sm:w-[3px] rounded-full"
               style={{
                 height: `${h}%`,
                 background: filled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.15)",
@@ -248,9 +248,9 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
       </div>
 
       {/* Progress + time */}
-      <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+      <div className="mt-2 sm:mt-3 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-muted-foreground">
         <span>{fmt(t)}</span>
-        <div className="mx-3 h-px flex-1 bg-white/5">
+        <div className="mx-2 sm:mx-3 h-px flex-1 bg-white/5">
           <div className="h-px bg-white/60" style={{ width: `${progress * 100}%` }} />
         </div>
         <span>{fmt(demo.duration)}</span>
@@ -259,7 +259,7 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
       {/* Transcript */}
       <div
         ref={scrollRef}
-        className="mt-6 h-44 overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-4 [mask-image:linear-gradient(180deg,transparent,#000_12%,#000_88%,transparent)]"
+        className="mt-4 sm:mt-6 h-36 sm:h-44 overflow-hidden rounded-lg sm:rounded-xl border border-white/5 bg-white/[0.02] p-3 sm:p-4 [mask-image:linear-gradient(180deg,transparent,#000_12%,#000_88%,transparent)]"
       >
         <AnimatePresence initial={false}>
           {visible.length === 0 ? (
@@ -267,22 +267,22 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
               key="idle"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex h-full items-center justify-center gap-2 text-xs text-muted-foreground"
+              className="flex h-full items-center justify-center gap-2 text-[11px] sm:text-xs text-muted-foreground text-center px-2"
             >
-              <Volume2 className="h-3.5 w-3.5" /> Press play to hear the transcript stream in real time.
+              <Volume2 className="h-3 sm:h-3.5 w-3 sm:w-3.5" /> Press play to hear the transcript stream in real time.
             </motion.div>
           ) : (
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {visible.map((l, i) => (
                 <motion.li
                   key={i}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: i === activeIdx ? 1 : 0.55, y: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="flex gap-3 text-sm leading-relaxed"
+                  className="flex gap-2 sm:gap-3 text-xs sm:text-sm leading-relaxed"
                 >
                   <span
-                    className={`mt-[2px] inline-flex h-5 shrink-0 items-center rounded-md px-1.5 font-mono text-[10px] uppercase tracking-wider ${
+                    className={`mt-[1px] sm:mt-[2px] inline-flex h-4 sm:h-5 shrink-0 items-center rounded-md px-1 sm:px-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-wider ${
                       l.who === "AI"
                         ? "bg-white text-black animate-pulse"
                         : "border border-white/10 bg-white/[0.04] text-muted-foreground"
@@ -290,7 +290,7 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
                   >
                     {l.who}
                   </span>
-                  <span className="text-foreground/90">{l.text}</span>
+                  <span className="text-foreground/90 flex-1 min-w-0">{l.text}</span>
                 </motion.li>
               ))}
             </ul>
@@ -299,11 +299,11 @@ function DemoPlayer({ demo, delay }: { demo: Demo; delay: number }) {
       </div>
 
       {/* Tags / outcomes */}
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-4 sm:mt-5 flex flex-wrap gap-1.5 sm:gap-2">
         {demo.tags.map((tg) => (
           <span
             key={tg}
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] text-muted-foreground"
+            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] text-muted-foreground"
           >
             <span className="h-1 w-1 rounded-full bg-success" /> {tg}
           </span>
